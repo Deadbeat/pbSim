@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import javax.swing.JTextField;
 
-public class PBSim {
+public class PBSim implements Runnable {
 	protected static Globals g = new Globals();
 	private static PBFrame frame;
 
@@ -36,6 +36,13 @@ public class PBSim {
 			return;
 		}
 
+		// Reset counters if we just came off a jackpot
+		// and are running a second time
+		if(g.hasWonJackpot()) {
+			g.reset();
+			frame.outJackpot.setText("");
+		}
+		
 		g.setRunning(true);
 
 		Thread uiThread = new Thread(new PBUIController(g));
@@ -127,10 +134,29 @@ public class PBSim {
 			runSimulation();
 		}
 	}
+	
+	protected static void resetButtonClicked() {
+		if(!g.isRunning()) {
+			frame.outSpent.setText("");
+			frame.outWinnings.setText("");
+			frame.outTotalDraws.setText("");
+			frame.outTimePlayed.setText("");
+			frame.outJackpot.setText("");
+			frame.outMatch4.setText("");
+			frame.outMatch5.setText("");
+				
+			g.reset();
+		}
+	}
 
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		PBSim sim = new PBSim();
+	}
+
+	@Override
+	public void run() {
+		main(null);
 	}
 
 }

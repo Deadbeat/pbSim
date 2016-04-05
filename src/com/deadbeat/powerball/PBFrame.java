@@ -29,6 +29,8 @@ public class PBFrame extends JFrame {
 	protected JLabel outSpent = new JLabel("");
 	protected JLabel outWinnings = new JLabel("");
 	protected JLabel outJackpot = new JLabel();
+	protected JLabel outMatch4 = new JLabel("");
+	protected JLabel outMatch5 = new JLabel("");
 	
 	protected JButton btnStartStop = new JButton();
 	
@@ -156,6 +158,13 @@ public class PBFrame extends JFrame {
 		JButton btnReset = new JButton("Reset");
 		btnReset.setFont(new Font("Arial Black", Font.PLAIN, 15));
 		btnReset.setIcon(new ImageIcon(PBFrame.class.getResource("/toolbarButtonGraphics/general/Refresh24.gif")));
+		btnReset.addActionListener(new ActionListener(){
+
+		    public void actionPerformed(ActionEvent e)
+		    {
+		        PBSim.resetButtonClicked(); 
+		    }
+		});
 		btnReset.setBounds(540, 383, 185, 54);
 		getContentPane().add(btnReset);
 		
@@ -182,6 +191,14 @@ public class PBFrame extends JFrame {
 		outJackpot.setFont(new Font("Arial Black", Font.PLAIN, 40));
 		outJackpot.setBounds(178, 175, 460, 71);
 		getContentPane().add(outJackpot);
+		
+//		JLabel outMatch4 = new JLabel("");
+		outMatch4.setBounds(55, 319, 275, 29);
+		getContentPane().add(outMatch4);
+		
+//		JLabel outMatch5 = new JLabel("");
+		outMatch5.setBounds(417, 319, 275, 29);
+		getContentPane().add(outMatch5);
 //		outJackpot.setText("JACKPOT!");
 		
 	}
